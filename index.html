@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brandeck Creations | Brand Identity Design</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+        :root {
+            --primary: #000000;
+            --secondary: #00eeff;
+            --accent: #0077ff;
+            --text: #ffffff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --neon-glow: 0 0 10px rgba(0, 238, 255, 0.7), 0 0 20px rgba(0, 238, 255, 0.4), 0 0 30px rgba(0, 238, 255, 0.2);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Animated Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--secondary);
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 3rem;
+            background-color: rgba(0, 0, 0, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: var(--transition);
+            filter: drop-shadow(var(--neon-glow));
+        }
+
+        .navbar.scrolled .logo-img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+            text-shadow: var(--neon-glow);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            background-color: var(--primary);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeUp 1s forwards 0.5s;
+            color: var(--text);
+            text-shadow: var(--neon-glow);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s forwards 0.8s;
+            color: var(--text);
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: transparent;
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s forwards 1.1s;
+            border: 2px solid var(--secondary);
+            box-shadow: var(--neon-glow);
+            text-shadow: 0 0 5px var(--secondary);
+        }
+
+        .hero-btn:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(0, 238, 255, 0.4), 0 0 20px rgba(0, 238, 255, 0.2);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 1;
+            background: linear-gradient(45deg, transparent, var(--accent), transparent);
+            clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
+            transform: translateX(100%);
+            animation: slideInRight 1.2s forwards 0.2s;
+            opacity: 0.1;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            box-shadow: var(--neon-glow);
+            animation: float 8s infinite ease-in-out;
+            opacity: 0.1;
+        }
+
+        .shape-1 {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 15%;
+            animation-delay: 1s;
+        }
+
+        .shape-3 {
+            width: 60px;
+            height: 60px;
+            top: 30%;
+            right: 35%;
+            animation-delay: 2s;
+        }
+
+        .shape-4 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            right: 20%;
+            animation-delay: 3s;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background-color: var(--dark-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            color: var(--text);
+            text-shadow: var(--neon-glow);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+            box-shadow: var(--neon-glow);
+        }
+
+        .section-title p {
+            color: var(--text);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border: 1px solid var(--secondary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 238, 255, 0.3);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background-color: var(--secondary);
+            transition: var(--transition);
+            z-index: -1;
+            box-shadow: var(--neon-glow);
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            text-shadow: var(--neon-glow);
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(360deg);
+            color: var(--secondary);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            color: var(--text);
+        }
+
+        .service-card:hover .service-title {
+            color: var(--secondary);
+            text-shadow: 0 0 5px var(--secondary);
+        }
+
+        .service-description {
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Founders Section */
+        .founders {
+            padding: 6rem 0;
+            background-color: var(--primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .founders .section-title h2,
+        .founders .section-title p {
+            color: var(--secondary);
+        }
+
+        .founders-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .founder-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(50px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInFounders 0.8s forwards;
+            border: 1px solid transparent;
+        }
+
+        .founder-card:hover {
+            transform: translateY(-10px);
+            border: 1px solid var(--secondary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 238, 255, 0.2);
+        }
+
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+            box-shadow: var(--neon-glow);
+        }
+
+        .founder-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .founder-image-container {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInFounders {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .founder-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            z-index: 1;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .founder-card:hover .founder-image-overlay {
+            opacity: 0.4;
+        }
+
+        .founder-img {
+            width: 100%;
+            height: auto;
+            transition: var(--transition);
+            transform: scale(1.01);
+            filter: grayscale(50%);
+        }
+
+        .founder-card:hover .founder-img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .founder-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            text-shadow: 0 0 5px var(--secondary);
+        }
+
+        .founder-title {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .founder-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+            box-shadow: 0 0 5px var(--accent);
+        }
+
+        .founder-bio {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .founder-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .founder-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .founder-social-link:hover {
+            background-color: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(0, 238, 255, 0.5);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 6rem 0;
+            background-color: var(--dark-bg);
+            position: relative;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: scale(0.9);
+            height: 300px;
+            border: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px) scale(1.01);
+            border: 1px solid var(--secondary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 238, 255, 0.2);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+            filter: grayscale(30%);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .portfolio-title {
+            color: var(--text);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transform: translateY(-20px);
+            transition: var(--transition);
+            text-shadow: 0 0 5px var(--text);
+        }
+
+        .portfolio-category {
+            color: var(--secondary);
+            font-size: 1rem;
+            transform: translateY(20px);
+            transition: var(--transition);
+            text-shadow: 0 0 5px var(--secondary);
+        }
+
+        .portfolio-item:hover .portfolio-title,
+        .portfolio-item:hover .portfolio-category {
+            transform: translateY(0);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            position: relative;
+            background-color: var(--primary);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+        }
+
+        .contact-info {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .contact-form {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            color: var(--text);
+            text-shadow: 0 0 5px var(--text);
+        }
+
+        .contact-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+            box-shadow: 0 0 5px var(--secondary);
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-right: 1rem;
+            text-shadow: 0 0 5px var(--secondary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: rgba(17, 17, 17, 0.8);
+            color: var(--text);
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 238, 255, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 1rem 2rem;
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
+            text-shadow: 0 0 5px var(--secondary);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(0, 238, 255, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 238, 255, 0.2);
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .footer-logo-img {
+            height: 60px;
+            width: auto;
+            filter: drop-shadow(var(--neon-glow));
+            transition: var(--transition);
+        }
+
+        .footer-logo:hover .footer-logo-img {
+            transform: scale(1.05);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .social-link:hover {
+            background-color: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px rgba(0, 238, 255, 0.5);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Neon Border Animation */
+        @keyframes neonPulse {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(0, 238, 255, 0.5), 0 0 10px rgba(0, 238, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(0, 238, 255, 0.8), 0 0 20px rgba(0, 238, 255, 0.5);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Growing neon effect for cards */
+        @keyframes neonGrowBorder {
+            0% {
+                box-shadow: 0 0 5px rgba(0, 238, 255, 0.3);
+                border-color: rgba(0, 238, 255, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(0, 238, 255, 0.7), 0 0 25px rgba(0, 238, 255, 0.4);
+                border-color: rgba(0, 238, 255, 0.8);
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .navbar.scrolled {
+                padding: 0.8rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .navbar.scrolled .logo-img {
+                height: 35px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-bg {
+                width: 100%;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                opacity: 0.1;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                z-index: 1001;
+                color: var(--secondary);
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .footer-logo-img {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="logo.jpg" alt="Brandeck Logo" class="logo-img">
+        </a>
+        <div class="nav-links">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#founders" class="nav-link">Founders</a>
+            <a href="#portfolio" class="nav-link">Portfolio</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transform Your Brand Identity</h1>
+                <p>We create memorable brand experiences through thoughtful design and strategic thinking. Let us help you stand out in a crowded marketplace.</p>
+                <a href="#contact" class="hero-btn">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Custom-branded solutions to enhance your company's visibility</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-tshirt service-icon"></i>
+                    <h3 class="service-title">Custom-Branded Merchandise</h3>
+                    <p class="service-description">High-quality branded products including corporate mugs, t-shirts, hoodies, pens, office stationery, tote bags, and tech accessories.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-box-open service-icon"></i>
+                    <h3 class="service-title">Employee Welcome Kits</h3>
+                    <p class="service-description">Thoughtfully curated onboarding kits with personalized notebooks, water bottles, welcome letters, branded apparel, and custom packaging.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-leaf service-icon"></i>
+                    <h3 class="service-title">Eco-Friendly Products</h3>
+                    <p class="service-description">Sustainable branded merchandise options that showcase your company's commitment to environmental responsibility.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-gift service-icon"></i>
+                    <h3 class="service-title">Corporate Gifting Solutions</h3>
+                    <p class="service-description">End-to-end corporate gifting strategies for clients, employees, and events that make meaningful impressions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Founders Section -->
+    <section id="founders" class="founders">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet the Founders</h2>
+                <p>The visionaries behind Brandeck Creations</p>
+            </div>
+            <div class="founders-container">
+                <div class="founder-card">
+                    <div class="founder-image-container">
+                        <div class="founder-image-overlay"></div>
+                        <img src="pr.jpg" alt="Priyansh Shah" class="founder-img">
+                    </div>
+                    <h3 class="founder-name">Priyansh Shah</h3>
+                    <h4 class="founder-title">Founder & CEO</h4>
+                    <p class="founder-bio">
+                        Priyansh Shah is an award-winning entrepreneur and a recognized name in the corporate world. With a track record of multiple milestones and achievements in business strategy, branding, and innovation, he brings visionary leadership to BranDeck Creations. His experience in leading successful ventures and delivering results across industries has positioned him as a trusted voice in corporate branding and client experience.
+                    </p>
+                    <div class="founder-social">
+                        <a href="#" class="founder-social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="founder-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="founder-social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-image-container">
+                        <div class="founder-image-overlay"></div>
+                        <img src="WhatsApp Image 2025-04-05 at 21.48.01_b7b7a1af.jpg" alt="Nilay Shah" class="founder-img">
+                    </div>
+                    <h3 class="founder-name">Nilay Shah</h3>
+                    <h4 class="founder-title">Co-Founder & Operations Strategist</h4>
+                    <p class="founder-bio">
+                        Nilay Shah is a creative problem-solver and operations strategist with a sharp focus on execution and efficiency. He leads the supply chain and production flow at BranDeck Creations, ensuring top-quality delivery and client satisfaction from sourcing to shipment. His meticulous approach helps transform ideas into seamless, scalable business solutions.
+                    </p>
+                    <div class="founder-social">
+                        <a href="#" class="founder-social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="founder-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="founder-social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Work</h2>
+                <p>A showcase of our latest brand identity projects</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="17.png" alt="Brand Project 1" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">Cups Rebrand</h3>
+                        <p class="portfolio-category">Brand Identity</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="23.png" alt="Brand Project 2" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">Gifting Cards Rebrand</h3>
+                        <p class="portfolio-category">Logo Design</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="ChatGPT Image Apr 5, 2025, 10_13_04 PM.png" alt="Brand Project 3" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">Kit Rebrand</h3>
+                        <p class="portfolio-category">Visual Identity</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="kit.png" alt="Brand Project 4" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">Goodies Rebrand</h3>
+                        <p class="portfolio-category">Complete Branding</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="21.png" alt="Brand Project 5" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">T-shirts Rebrand</h3>
+                        <p class="portfolio-category">Brand Strategy</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="25.png" alt="Brand Project 6" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">Books Rebrand</h3>
+                        <p class="portfolio-category">Identity System</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Let's discuss your brand identity needs</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 class="contact-title">Contact Information</h3>
+                    <p>We'd love to hear from you. Contact us for a free consultation about your branding project.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <span>123 Creative Street, Design City</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <span>hello@brandeck.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <a href="#" class="footer-logo">Brandeck</a>
+            <p>Creating memorable brand experiences through thoughtful design</p>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Brandeck Creations. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Animations for sections
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate section titles
+                        if (entry.target.classList.contains('section-title')) {
+                            entry.target.style.animation = 'fadeUp 1s forwards';
+                        }
+
+                        // Animate service cards
+                        if (entry.target.classList.contains('services')) {
+                            const cards = entry.target.querySelectorAll('.service-card');
+                            cards.forEach((card, index) => {
+                                card.style.animation = `fadeUp 0.6s forwards ${index * 0.2}s`;
+                            });
+                        }
+
+                        // Animate portfolio items
+                        if (entry.target.classList.contains('portfolio')) {
+                            const items = entry.target.querySelectorAll('.portfolio-item');
+                            items.forEach((item, index) => {
+                                item.style.animation = `fadeUp 0.6s forwards ${index * 0.1}s`;
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            });
+                        }
+
+                        // Animate contact section
+                        if (entry.target.classList.contains('contact')) {
+                            const info = entry.target.querySelector('.contact-info');
+                            const form = entry.target.querySelector('.contact-form');
+                            
+                            info.style.animation = 'fadeUp 0.8s forwards';
+                            form.style.animation = 'fadeUp 0.8s forwards 0.3s';
+                        }
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections and elements that need animations
+            document.querySelectorAll('.section-title, .services, .portfolio, .contact').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Add floating animation to shapes
+            document.querySelectorAll('.shape').forEach(shape => {
+                const randomX = Math.random() * 30 - 15;
+                const randomY = Math.random() * 30 - 15;
+                shape.style.animation = `float ${5 + Math.random() * 5}s infinite ease-in-out`;
+                shape.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            });
+
+            // Mobile menu toggle
+            const createMobileMenu = () => {
+                const navbar = document.querySelector('.navbar');
+                const navLinks = document.querySelector('.nav-links');
+                
+                // Create hamburger button if it doesn't exist
+                if (!document.querySelector('.hamburger')) {
+                    const hamburger = document.createElement('div');
+                    hamburger.classList.add('hamburger');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    navbar.appendChild(hamburger);
+                    
+                    hamburger.addEventListener('click', () => {
+                        navLinks.classList.toggle('active');
+                        hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                            '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                    });
+                    
+                    // Close menu when clicking on a link
+                    navLinks.querySelectorAll('.nav-link').forEach(link => {
+                        link.addEventListener('click', () => {
+                            navLinks.classList.remove('active');
+                            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                        });
+                    });
+                }
+            };
+
+            document.addEventListener('DOMContentLoaded', function() {
+        // Add observer for founder cards
+        const founderCards = document.querySelectorAll('.founder-card');
+        
+        const observeFounders = new IntersectionObserver(function(entries, observer) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = `fadeUp 0.8s forwards ${index * 0.3}s`;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        founderCards.forEach(card => {
+            observeFounders.observe(card);
+        });
+
+        // Add the founders link to navbar if not already present
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks && !document.querySelector('a[href="#founders"]')) {
+            const portfolioLink = document.querySelector('a[href="#portfolio"]');
+            const contactLink = document.querySelector('a[href="#contact"]');
+            
+            if (portfolioLink && contactLink) {
+                const foundersLink = document.createElement('a');
+                foundersLink.href = "#founders";
+                foundersLink.className = "nav-link";
+                foundersLink.textContent = "Founders";
+                
+                navLinks.insertBefore(foundersLink, contactLink);
+            }
+        }
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Explicitly target and animate founder cards
+    const founderCards = document.querySelectorAll('.founder-card');
+    
+    setTimeout(() => {
+        founderCards.forEach((card, index) => {
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+        });
+    }, 500);
+    
+    // Fix image paths if needed
+    const founderImages = document.querySelectorAll('.founder-img');
+    founderImages.forEach(img => {
+        // Check if images are loading
+        img.onerror = function() {
+            // If image fails to load, replace with a placeholder
+            this.src = "/api/placeholder/400/400";
+            console.log("Image failed to load: " + this.alt);
+        };
+    });
+});
+            
+            // Check if we need to create mobile menu based on screen size
+            if (window.innerWidth <= 768) {
+                createMobileMenu();
+            }
+            
+            window.addEventListener('resize', () => {
+                if (window.innerWidth <= 768) {
+                    createMobileMenu();
+                }
+            });
+        });
+    </script>
+</body> 
+</html>
